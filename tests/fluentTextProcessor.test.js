@@ -1,7 +1,7 @@
-const { FluentTextProcessor } = require('../src/fluentTextProcessor')
-
 const { describe, it } = require('mocha')
 const { expect } = require('chai')
+
+const { FluentTextProcessor } = require('../src/fluentTextProcessor')
 
 const mockText = require('./mocks/valid')
 

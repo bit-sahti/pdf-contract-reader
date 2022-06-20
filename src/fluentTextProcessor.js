@@ -1,3 +1,5 @@
+const { ValidateRegex } = require('./util')
+
 class FluentTextProcessor {
     #content
 
@@ -6,7 +8,7 @@ class FluentTextProcessor {
     }
 
     extractPeopleData() {
-        const personMatcher = /(?<=(ontratante|contratada):\s{1})(?!\s)(.*\n.*?)$/gmi
+        const personMatcher = ValidateRegex.execute(/(?<=(ontratante|contratada):\s{1})(?!\s)(.*\n.*?)$/gmi)
 
         const people = this.#content.match(personMatcher)
         
