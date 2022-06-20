@@ -14,7 +14,7 @@ describe('FluentTextProcessor API', () => {
         expect(result).to.be.deep.equal(mockText)
     })
 
-    it("should extract the people's data", () => {
+    it("should extract people's data", () => {
         const fluentTextProcessor = new FluentTextProcessor(mockText)
         const expected = [
             [
@@ -28,6 +28,66 @@ describe('FluentTextProcessor API', () => {
         ]
 
         const result = fluentTextProcessor.extractPeopleData().build()
+
+        expect(result).to.be.deep.equal(expected)
+    })
+
+    it('should divide the data into columns', () => {
+        const extractedText = [[
+            'Xuxa da Silva, brasileira, casada, CPF 235.743.420-12, residente e ',
+             'domiciliada a Rua dos bobos, zero, bairro Alphaville, São Paulo. '
+         ].join('\n')]
+
+        const fluentTextProcessor = new FluentTextProcessor(extractedText)
+
+        const expected = [
+            [
+                'Xuxa da Silva',
+                ' brasileira',
+                ' casada',
+                ' CPF 235.743.420-12',
+                ' residente e \ndomiciliada a Rua dos bobos',
+                ' zero',
+                ' bairro Alphaville',
+                ' São Paulo. '
+            ]
+        ]
+
+        const result = fluentTextProcessor.divideTextInColumns().build()
+
+        expect(result).to.be.deep.equal(expected)
+    })
+
+    it('should trim empty spaces', () => {
+        const extractedText = [
+            [
+                'Xuxa da Silva',
+                ' brasileira',
+                ' casada',
+                ' CPF 235.743.420-12',
+                ' residente e \ndomiciliada a Rua dos bobos',
+                ' zero',
+                ' bairro Alphaville',
+                ' São Paulo. '
+            ]
+        ]
+
+        const fluentTextProcessor = new FluentTextProcessor(extractedText)
+
+        const expected = [
+            [
+                'Xuxa da Silva',
+                'brasileira',
+                'casada',
+                'CPF 235.743.420-12',
+                'residente e domiciliada a Rua dos bobos',
+                'zero',
+                'bairro Alphaville',
+                'São Paulo.'
+            ]
+        ]
+
+        const result = fluentTextProcessor.trimSpaces().build()
 
         expect(result).to.be.deep.equal(expected)
     })

@@ -17,6 +17,22 @@ class FluentTextProcessor {
         return this
     }
 
+    divideTextInColumns() {
+        const separator = ValidateRegex.execute(/,/)
+
+        this.#content = this.#content.map(personData => personData.split(separator))
+
+        return this
+    }
+
+    trimSpaces() {
+        const emptySpaces = ValidateRegex.execute(/^[\s]+|[\s]+$|\n/g)
+
+        this.#content = this.#content.map(personData => personData.map(item => item.replace(emptySpaces, '')))
+
+        return this
+    }
+
     build() {
         return this.#content
     }
