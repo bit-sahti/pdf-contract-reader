@@ -5,7 +5,7 @@ const { FluentTextProcessor } = require('../src/fluentTextProcessor')
 
 const mockText = require('./mocks/valid')
 
-describe('FluentTextProcessor API', () => {
+describe('[FluentTextProcessor] test suite', () => {
     it('should return the content on build', () => {
         const fluentTextProcessor = new FluentTextProcessor(mockText)
 
