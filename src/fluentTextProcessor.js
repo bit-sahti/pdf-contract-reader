@@ -1,3 +1,4 @@
+const { Person } = require('./person')
 const { ValidateRegex } = require('./util')
 
 class FluentTextProcessor {
@@ -29,6 +30,12 @@ class FluentTextProcessor {
         const emptySpaces = ValidateRegex.execute(/^[\s]+|[\s]+$|\n/g)
 
         this.#content = this.#content.map(personData => personData.map(item => item.replace(emptySpaces, '')))
+
+        return this
+    }
+
+    mapPeople() {
+        this.#content = this.#content.map(person => new Person(person))
 
         return this
     }

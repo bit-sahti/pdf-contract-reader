@@ -36,7 +36,7 @@ class Person {
     }
 
     #extractStreetName(street) {
-        const regex = ValidateRegex.execute(/(?:rua).+/gi)
+        const regex = ValidateRegex.execute(/(?<=\sa\s).+/gi)
 
         return this.#normalizeLetterCases(street.match(regex).join())
     }
@@ -44,7 +44,7 @@ class Person {
     #extractDistrictName(district) {
         const regex = ValidateRegex.execute(/(?<=\s).+/gi)
 
-        return district.match(regex).join()
+        return this.#normalizeLetterCases(district.match(regex).join())
     }
 
     #removePonctuationCharacters(word) {
