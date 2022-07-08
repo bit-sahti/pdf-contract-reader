@@ -2,7 +2,7 @@ const safeRegex = require("safe-regex")
 
 class InvalidRegexError extends Error {
     constructor(regExp) {
-        super(`The Regex expression ${(regExp || 'provided')} is unsafe.`)
+        super(`The Regex expression ${regExp} is unsafe.`)
         this.name = this.constructor.name
     }
 }

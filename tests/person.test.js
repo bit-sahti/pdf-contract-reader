@@ -31,11 +31,4 @@ describe('[Person] test suite', () => {
 
         expect(person).to.be.deep.equal(expected)
     })
-
-
-    // it('should normalize the letters cases', () => {
-    //     const name = Person.normalizeLetterCases('xUxA da siLVA')
-
-    //     expect(name).to.equal('Xuxa da Silva')
-    // })
 }) 
