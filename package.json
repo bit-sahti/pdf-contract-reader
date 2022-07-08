@@ -16,7 +16,7 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon --ignore docs/ src/index.js",
     "start": "node src/index.js",
     "test": "npx mocha -w --parallel tests/*.test.js",
     "test:cov": "npx nyc npx mocha --parallel tests/*.test.js"

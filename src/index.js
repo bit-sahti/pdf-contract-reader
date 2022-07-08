@@ -1,13 +1,25 @@
 'use strict'
 
-const { readFile } = require('fs/promises')
-const { join } = require('path')
 const pdfParser = require('pdf-parse')
+const { readFile, writeFile } = require('fs/promises')
+const { join } = require('path')
+const { TextProcessorFacade } = require('./textProcessorFacade')
 
 ;(async () => {
-    const dataBuffer = await readFile(join(__dirname, '../docs/contrato.pdf'))
+    try {
+        const contractPath = join(__dirname, '../docs/contrato.pdf')
+        const extractedDataPath = join(__dirname, '../docs/extractedData.json')
 
-    const data = await pdfParser(dataBuffer)
+        const dataBuffer = await readFile(contractPath)
 
-    console.log(data.text)
+        const rawData = await pdfParser(dataBuffer)
+
+        const textProcessor = new TextProcessorFacade(rawData.text)
+
+        const extractedInfo = textProcessor.getPeopleFromData()
+
+        await writeFile(extractedDataPath, JSON.stringify(extractedInfo))
+    } catch (error) {
+        console.log(error)
+    }
 })()
